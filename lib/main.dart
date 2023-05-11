@@ -51,7 +51,13 @@ class _MyAppState extends State<MyApp> {
                     child: Container(
                       height: 100,
                       width: 100,
-                      color: Colors.red,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      child: Center(
+                        child: Text('${moveList[index]}',
+                            style: TextStyle(fontSize: 80)),
+                      ),
                     ),
                   );
                 },
