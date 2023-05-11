@@ -11,18 +11,30 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          body: GridView.count(
-        crossAxisCount: 3,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        children: [
-          Text('text'),
-          Text('text'),
-          Text('text'),
-          Text('text'),
-          Text('text'),
-        ],
-      )),
+          body: GridView.builder(
+              itemCount: 9,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 10),
+              itemBuilder: (context, index) {
+                return Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.red,
+                );
+              })
+          // GridView.count(
+          //   crossAxisCount: 3,
+          //   crossAxisSpacing: 10,
+          //   mainAxisSpacing: 10,
+          //   children: [
+          //     Text('text'),
+          //     Text('text'),
+          //     Text('text'),
+          //     Text('text'),
+          //     Text('text'),
+          //   ],
+          // ),
+          ),
     );
   }
 }
