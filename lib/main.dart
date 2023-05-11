@@ -32,10 +32,15 @@ class MyApp extends StatelessWidget {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10),
                 itemBuilder: (context, index) {
-                  return Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.red,
+                  return GestureDetector(
+                    onTap: () {
+                      print('$index');
+                    },
+                    child: Container(
+                      height: 100,
+                      width: 100,
+                      color: Colors.red,
+                    ),
                   );
                 },
               ),
