@@ -13,6 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isTurnO = true;
+  var moveList = ['', '', '', '', '', '', '', '', ''];
   //if(isTurnO){
   // 'turn o'
   //}else {
@@ -65,7 +66,14 @@ class _MyAppState extends State<MyApp> {
   //end of build
   void onTapped(int index) {
     setState(() {
+      if (isTurnO) {
+        moveList[index] = 'O';
+      } else {
+        moveList[index] = 'X';
+      }
+
       isTurnO = !isTurnO;
+      print(moveList);
     });
   }
 }
