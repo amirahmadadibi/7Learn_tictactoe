@@ -71,6 +71,9 @@ class _MyAppState extends State<MyApp> {
 
   //end of build
   void onTapped(int index) {
+    if (moveList[index].isNotEmpty) {
+      return;
+    }
     setState(() {
       if (isTurnO) {
         moveList[index] = 'O';
