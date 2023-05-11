@@ -4,9 +4,20 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isTurnO = true;
+  //if(isTurnO){
+  // 'turn o'
+  //}else {
+  // 'turn x'
+  //}
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +29,7 @@ class MyApp extends StatelessWidget {
               height: 50,
             ),
             Text(
-              'turn O',
+              isTurnO ? 'Turn O' : 'Turn X',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             SizedBox(
@@ -34,7 +45,7 @@ class MyApp extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      print('$index');
+                      onTapped(index);
                     },
                     child: Container(
                       height: 100,
@@ -49,5 +60,12 @@ class MyApp extends StatelessWidget {
         ),
       )),
     );
+  }
+
+  //end of build
+  void onTapped(int index) {
+    setState(() {
+      isTurnO = !isTurnO;
+    });
   }
 }
