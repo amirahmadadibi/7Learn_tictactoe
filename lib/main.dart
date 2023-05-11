@@ -80,9 +80,15 @@ class _MyAppState extends State<MyApp> {
       } else {
         moveList[index] = 'X';
       }
-
+      checkWinner();
       isTurnO = !isTurnO;
       print(moveList);
     });
+  }
+
+  void checkWinner() {
+    if (moveList[0] == moveList[1] && moveList[0] == moveList[2] && moveList[0].isNotEmpty) {
+      print('win');
+    }
   }
 }
