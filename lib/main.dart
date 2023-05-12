@@ -20,60 +20,94 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+          backgroundColor: Colors.white,
           body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              isTurnO ? 'Turn O' : 'Turn X',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Visibility(
-              visible: winnerTitle.isNotEmpty,
-              child: Text(
-                'game is over : $winnerTitle',
-                style: TextStyle(fontSize: 22),
-              ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Expanded(
-              child: GridView.builder(
-                itemCount: 9,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      onTapped(index);
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Text(
+                  isTurnO ? 'Turn O' : 'Turn X',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Visibility(
+                  visible: winnerTitle.isNotEmpty,
+                  child: Text(
+                    'game is over : $winnerTitle',
+                    style: TextStyle(fontSize: 22),
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Expanded(
+                  child: GridView.builder(
+                    itemCount: 9,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10),
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          onTapped(index);
+                        },
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              color: winnerTitle.isNotEmpty
+                                  ? Colors.white
+                                  : Colors.grey[100],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12))),
+                          child: Center(
+                            child: Text('${moveList[index]}',
+                                style: TextStyle(fontSize: 80)),
+                          ),
+                        ),
+                      );
                     },
-                    child: Container(
-                      height: 100,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.all(Radius.circular(12))),
-                      child: Center(
-                        child: Text('${moveList[index]}',
-                            style: TextStyle(fontSize: 80)),
-                      ),
+                  ),
+                ),
+                Visibility(
+                  visible: winnerTitle.isNotEmpty,
+                  child: GestureDetector(
+                    onTap: () {
+                      repeatGame();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.repeat),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Repeat Game',
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ],
                     ),
-                  );
-                },
-              ),
+                  ),
+                )
+              ],
             ),
-          ],
-        ),
-      )),
+          )),
     );
+  }
+
+  void repeatGame() {
+    setState(() {
+      isTurnO = true;
+      moveList = ['', '', '', '', '', '', '', '', ''];
+      filedPositions = 0;
+      winnerTitle = '';
+    });
   }
 
   //end of build
