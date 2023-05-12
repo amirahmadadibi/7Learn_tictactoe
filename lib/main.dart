@@ -33,9 +33,12 @@ class _MyAppState extends State<MyApp> {
             SizedBox(
               height: 50,
             ),
-            Text(
-              'game is over : $winnerTitle',
-              style: TextStyle(fontSize: 22),
+            Visibility(
+              visible: winnerTitle.isNotEmpty,
+              child: Text(
+                'game is over : $winnerTitle',
+                style: TextStyle(fontSize: 22),
+              ),
             ),
             SizedBox(
               height: 50,
