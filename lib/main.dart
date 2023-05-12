@@ -14,11 +14,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool isTurnO = true;
   var moveList = ['', '', '', '', '', '', '', '', ''];
-  //if(isTurnO){
-  // 'turn o'
-  //}else {
-  // 'turn x'
-  //}
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -80,15 +75,63 @@ class _MyAppState extends State<MyApp> {
       } else {
         moveList[index] = 'X';
       }
+
       checkWinner();
+
       isTurnO = !isTurnO;
+      
       print(moveList);
     });
   }
 
   void checkWinner() {
-    if (moveList[0] == moveList[1] && moveList[0] == moveList[2] && moveList[0].isNotEmpty) {
+    if (moveList[0] == moveList[1] &&
+        moveList[0] == moveList[2] &&
+        moveList[0].isNotEmpty) {
       print('win');
+      return;
+    }
+    if (moveList[3] == moveList[4] &&
+        moveList[3] == moveList[5] &&
+        moveList[3].isNotEmpty) {
+      print('win');
+      return;
+    }
+    if (moveList[6] == moveList[7] &&
+        moveList[6] == moveList[8] &&
+        moveList[6].isNotEmpty) {
+      print('win');
+      return;
+    }
+    if (moveList[0] == moveList[3] &&
+        moveList[0] == moveList[6] &&
+        moveList[0].isNotEmpty) {
+      print('win');
+      return;
+    }
+    if (moveList[1] == moveList[4] &&
+        moveList[1] == moveList[7] &&
+        moveList[1].isNotEmpty) {
+      print('win');
+      return;
+    }
+    if (moveList[2] == moveList[5] &&
+        moveList[2] == moveList[8] &&
+        moveList[2].isNotEmpty) {
+      print('win');
+      return;
+    }
+    if (moveList[0] == moveList[4] &&
+        moveList[0] == moveList[8] &&
+        moveList[0].isNotEmpty) {
+      print('win');
+      return;
+    }
+    if (moveList[2] == moveList[4] &&
+        moveList[2] == moveList[6] &&
+        moveList[2].isNotEmpty) {
+      print('win');
+      return;
     }
   }
 }
