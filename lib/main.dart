@@ -14,6 +14,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool isTurnO = true;
   var moveList = ['', '', '', '', '', '', '', '', ''];
+  int filedPositions = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -69,6 +70,8 @@ class _MyAppState extends State<MyApp> {
     if (moveList[index].isNotEmpty) {
       return;
     }
+    filedPositions = filedPositions + 1;
+    print(filedPositions);
     setState(() {
       if (isTurnO) {
         moveList[index] = 'O';
@@ -79,7 +82,7 @@ class _MyAppState extends State<MyApp> {
       checkWinner();
 
       isTurnO = !isTurnO;
-      
+
       print(moveList);
     });
   }
@@ -132,6 +135,10 @@ class _MyAppState extends State<MyApp> {
         moveList[2].isNotEmpty) {
       print('win');
       return;
+    }
+
+    if (filedPositions == 9) {
+      print('draw');
     }
   }
 }
