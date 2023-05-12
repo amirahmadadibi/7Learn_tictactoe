@@ -15,6 +15,7 @@ class _MyAppState extends State<MyApp> {
   bool isTurnO = true;
   var moveList = ['', '', '', '', '', '', '', '', ''];
   int filedPositions = 0;
+  String winnerTitle = '';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,6 +29,13 @@ class _MyAppState extends State<MyApp> {
             Text(
               isTurnO ? 'Turn O' : 'Turn X',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Text(
+              'game is over : $winnerTitle',
+              style: TextStyle(fontSize: 22),
             ),
             SizedBox(
               height: 50,
@@ -79,7 +87,12 @@ class _MyAppState extends State<MyApp> {
         moveList[index] = 'X';
       }
 
-      checkWinner();
+      int result = checkWinner();
+      if (result == 1) {
+        winnerTitle = isTurnO ? 'O' : 'X';
+      } else if (result == 0) {
+        winnerTitle = 'draw';
+      }
 
       isTurnO = !isTurnO;
 
@@ -87,58 +100,52 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void checkWinner() {
+  int checkWinner() {
     if (moveList[0] == moveList[1] &&
         moveList[0] == moveList[2] &&
         moveList[0].isNotEmpty) {
-      print('win');
-      return;
+      return 1;
     }
     if (moveList[3] == moveList[4] &&
         moveList[3] == moveList[5] &&
         moveList[3].isNotEmpty) {
-      print('win');
-      return;
+      return 1;
     }
     if (moveList[6] == moveList[7] &&
         moveList[6] == moveList[8] &&
         moveList[6].isNotEmpty) {
-      print('win');
-      return;
+      return 1;
     }
     if (moveList[0] == moveList[3] &&
         moveList[0] == moveList[6] &&
         moveList[0].isNotEmpty) {
-      print('win');
-      return;
+      return 1;
     }
     if (moveList[1] == moveList[4] &&
         moveList[1] == moveList[7] &&
         moveList[1].isNotEmpty) {
-      print('win');
-      return;
+      return 1;
     }
     if (moveList[2] == moveList[5] &&
         moveList[2] == moveList[8] &&
         moveList[2].isNotEmpty) {
-      print('win');
-      return;
+      return 1;
     }
     if (moveList[0] == moveList[4] &&
         moveList[0] == moveList[8] &&
         moveList[0].isNotEmpty) {
-      print('win');
-      return;
+      return 1;
     }
     if (moveList[2] == moveList[4] &&
         moveList[2] == moveList[6] &&
         moveList[2].isNotEmpty) {
-      print('win');
-      return;
+      return 1;
     }
 
     if (filedPositions == 9) {
-      print('draw');
+      return 0;
     }
+
+    return -1;
   }
 }
