@@ -28,8 +28,51 @@ class _MyAppState extends State<MyApp> {
                   height: 50,
                 ),
                 Text(
-                  isTurnO ? 'Turn O' : 'Turn X',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  'Turn',
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffAAB0BD)),
+                ),
+                Text(
+                  isTurnO ? 'O' : 'X',
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Visibility(
+                  visible: winnerTitle.isNotEmpty,
+                  child: GestureDetector(
+                    onTap: () {
+                      repeatGame();
+                    },
+                    child: Container(
+                      height: 39,
+                      width: 131,
+                      decoration: BoxDecoration(
+                          color: Color(0xff33428DED),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset('assets/images/refresh.png'),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Repeat Game',
+                            style: TextStyle(
+                                fontSize: 14, color: Color(0xff428DED)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 50,
@@ -45,56 +88,36 @@ class _MyAppState extends State<MyApp> {
                   height: 50,
                 ),
                 Expanded(
-                  child: GridView.builder(
-                    itemCount: 9,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10),
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          onTapped(index);
-                        },
-                        child: Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                              color: winnerTitle.isNotEmpty
-                                  ? Colors.white
-                                  : Colors.grey[100],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12))),
-                          child: Center(
-                            child: Text('${moveList[index]}',
-                                style: TextStyle(fontSize: 80)),
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 25),
+                    child: GridView.builder(
+                      itemCount: 9,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            onTapped(index);
+                          },
+                          child: Container(
+                            height: 100,
+                            width: 100,
+                            decoration: BoxDecoration(
+                                color: Color(0xffF5F5F5),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            child: Center(
+                              child: Text('${moveList[index]}',
+                                  style: TextStyle(fontSize: 60)),
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Visibility(
-                  visible: winnerTitle.isNotEmpty,
-                  child: GestureDetector(
-                    onTap: () {
-                      repeatGame();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.repeat),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Repeat Game',
-                          style: TextStyle(fontSize: 22),
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   ),
-                )
+                ),
               ],
             ),
           )),
